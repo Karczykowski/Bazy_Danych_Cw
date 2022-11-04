@@ -4,7 +4,8 @@ CREATE TABLE postac (
 id_postaci INT PRIMARY KEY AUTO_INCREMENT,
 nazwa VARCHAR(40),
 rodzaj enum('wiking', 'ptak', 'kobieta'),
-data_ur date, wiek INT UNSIGNED
+data_ur date, 
+wiek INT UNSIGNED
 );
 
 1.2
@@ -75,14 +76,8 @@ FOREIGN KEY (id_konsumenta) REFERENCES postac(id_postaci)
 
 4.2
 
-INSERT INTO przetwory VALUES (
-DEFAULT,
-DEFAULT,
-1, 
-"bigos",
-DEFAULT,
-3
-);
+INSERT INTO przetwory VALUES 
+(DEFAULT, DEFAULT, 1, "bigos", DEFAULT, 3);
 
 5.1
 
