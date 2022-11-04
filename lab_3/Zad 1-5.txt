@@ -46,7 +46,7 @@ CREATE TABLE izba (
 adres_budynku varchar(10),
 nazwa_izby varchar(100),
 metraz INT UNSIGNED,
-WLASCICIEL INT,
+wlasciciel INT,
 PRIMARY KEY (adres_budynku, nazwa_izby),
 FOREIGN KEY(wlasciciel) REFERENCES postac(id_postaci)
 ON DELETE SET NULL
