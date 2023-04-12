@@ -1,0 +1,241 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <mathf>
+
+int minWsk(int *a, int *b) // *a odwo³uje siê do wartosci a, &k odwo³uje sie do indeksu w pamieci
+{
+    if(*b>*a) return *a;
+    else return *b;
+}
+
+int *minWsk2(int *a, int *b)
+{
+    if(*b>*a) return a;
+    else return b;
+}
+void zamiankaWsk(int *a, int *b)
+{
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
+
+int *rezerwacja()
+{
+    int *a = malloc(sizeof(int));
+    return a;
+}
+
+int NWD(int a, int b)
+{
+    while(a!=b)
+       if(a>b)
+           a-=b; //lub a = a - b;
+       else
+           b-=a; //lub b = b-a
+    return a; // lub b - obie zmienne przechowuj¹ wynik NWD(a,b)
+}
+
+int NWW(int a, int b) {
+    return a*b/NWD(a, b);
+}
+
+void karty(int a, int b, int c, int d)
+    {
+        int tab[4]={a,b,c,d};
+
+        int powtorki=0;
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                if(tab[i]==tab[j]) powtorki++;
+            }
+        }
+
+        if(powtorki==4)
+        {
+            printf("brak\n");
+        }
+        if(powtorki==6)
+        {
+            printf("para\n");
+        }
+        if(powtorki==10)
+        {
+            printf("trojka\n");
+        }
+        if(powtorki==16)
+        {
+            printf("kareta\n");
+        }
+        if(powtorki==8)
+        {
+            printf("dwie pary\n");
+        }
+    }
+
+int wskazCyfre(int number,int n)
+{
+    while(number>0)
+    {
+        if(number%10==n) return 1;
+        number=number/10;
+    }
+    return 0;
+}
+
+void wskPodwojenie(int *a)
+{
+    int x=*a;
+    x=x*2;
+    *a=x;
+}
+
+void unique(int tab[], int n)
+{
+    int iloscPowtorzen=0;
+    for(int i=0;i<n;i++)
+    {
+        iloscPowtorzen=0;
+        for(int j=0;j<n;j++)
+        {
+            if(tab[j]==tab[i]) iloscPowtorzen++;
+        }
+        if(iloscPowtorzen==1)
+        {
+        printf("%d\n", tab[i]);
+        }
+
+    }
+}
+void Wypisz(int tab[], int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        printf("%d ", tab[i]);
+    }
+    printf("\n");
+}
+
+void zamianka(int *a, int *b)
+{
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
+
+void zamianaParzystaWartosc(int tab[], int n)
+{
+    int dlugosc=n;
+    for(int i=0;i<dlugosc;i++)
+    {
+        if(tab[i]%2==0)
+        {
+            for(int j=dlugosc-1;j>i;j--)
+            {
+                if(tab[j]%2==0)
+                {
+                    zamianka(&tab[i], &tab[j]);
+                    dlugosc=j;
+                    break;
+                }
+            }
+        }
+    }
+    Wypisz(tab, n);
+}
+
+void zamianaParzystaIndeks(int tab[], int n)
+{
+    int dlugosc=n;
+    for(int i=0;i<dlugosc;i++)
+    {
+        if(i%2==0)
+        {
+            for(int j=dlugosc-1;j>n/2;j--)
+            {
+                if(j%2==0)
+                {
+                zamianka(&tab[i], &tab[j]);
+                dlugosc=j;
+                break;
+                }
+            }
+        }
+    }
+Wypisz(tab, n);
+}
+
+int main()
+{
+    /*
+    int k=10;
+    int n=11;
+
+    int x=minWsk(&k, &n);
+    printf("Mniejsza to: %d", x);
+    return 0;
+    */
+
+    /*
+    int k=10;
+    int n=11;
+
+    int *x=minWsk2(&k, &n);
+    printf("Mniejsza to: %p", x);
+    */
+
+    /*
+    int k=10;
+    int n=11;
+
+    int *ki=&k;
+    int *ni=&n;
+
+    printf("%d, %d\n", *ki, *ni);
+
+    zamiankaWsk(ki, ni);
+
+    printf("%d, %d\n", *ki, *ni);
+    */
+
+    /*
+    int *x=rezerwacja();
+    printf("Zarezerwowany wskaznik: %p", x);
+    */
+
+    //ZADANIA======================================
+
+    /*
+    int a, b, c, d;
+    scanf("%d %d %d %d", &a, &b, &c, &d);
+    karty(a,b,c,d);
+    */
+
+    /*
+    printf("Czy jest zawarta: %d\n", wskazCyfre(123, 9));
+    */
+
+    /*
+    int x=10;
+    printf("Liczba przed podwojeniem: %d\n", x);
+    wskPodwojenie(&x);
+    printf("Liczba po podwojeniu: %d\n", x);
+    */
+
+    /*
+    int tab[6]={1,2,2,3,3,4};
+    unique(tab, 6);
+    */
+
+    /*
+    int tab[5]={2,3,6,3,8};
+    zamianaParzystaWartosc(tab, 5);
+    */
+
+    int tab[6]={1,2,4,6,8,3};
+    zamianaParzystaIndeks(tab, 6);
+
+    return 0;
+}
