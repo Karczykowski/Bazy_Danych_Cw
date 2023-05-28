@@ -1,0 +1,594 @@
+import numpy as np
+import pandas
+
+def change(A, x):
+    wynik = A.copy()
+    wynik[wynik == 0] = x
+    return wynik
+
+
+tablica = np.array([x * 2 for x in range(0, 20)])
+
+print(tablica)
+tablica.resize(2, 10)
+print(tablica)
+tablica.resize(10)
+print(tablica)
+tablica += 3
+print(tablica)
+tablica *= 2
+print(tablica)
+
+tablica = np.array([0, 10, 0, 0, 123, 3])
+
+print(tablica)
+print(change(tablica, 2))
+print(tablica)
+
+a = np.matrix([[1, 1, 2], [2, 1, 0], [4, 1, 2]])
+b = np.matrix([[2, 5, 7], [2, 8, 0], [4, 3, 1]])
+print(a)
+print(b)
+print(a + b)
+print(a * b)
+print(a.item(0, 0) * b.item(1, 1))
+
+print(a.transpose())
+print(np.linalg.inv(a))
+print(a)
+print(np.power(a, 5))
+print(a ** 5)
+print(np.linalg.det(b))
+print(b ** (-3))
+
+c = np.matrix([[1], [2], [4]])
+d = np.matrix([[2, 5, 7]])
+
+print(c)
+print(d)
+print(c * d)
+print(d * c)
+print(c.item(0, 0) * d.item(0, 0))
+print(c + d)
+
+e = np.matrix([[1, 5], [2, 1]])
+f = np.matrix([[2, 1], [2, 8]])
+
+print(e)
+print(f)
+
+print(e/f)
+print(e//f)
+print(e%f)
+
+lp = np.array([1,2,3,4,5,6,7,8,9,10])
+panstwo = np.array(["China", "Japan", "Germany", "USA", "South Korea", "India", "Brazil", "Mexico", "Spain", "Russia"])
+a1999 = np.array([0.56, 8.1, 5.3, 5.63, 2.36, 0.53, 1.1, 0.99, 2.28, 0.94])
+a2014 = np.array([19.91, 8.27, 5.6, 4.25, 4.12, 3.15, 2.31, 1.91, 1.89, 1.69])
+
+Imiona = np.array(["Anna", "Zofia", "Sylwia", "Katarzyna", "Teresa", "Tomasz", "Cezary", "Zenon", "Filip", "Adrian"])
+Wiek = np.array([21, 40, 13, 31, 34, 14, 13, 28, 20, 15])
+Plec = np.array(['K', 'K', 'K', 'K', 'K', 'M', 'M', 'M', 'M', 'M'])
+Waga = np.array([65, 80, 64, 69, 74, 61, 66, 61, 69, 77])
+Wzrost = np.array([179, 179, 151, 177, 170, 157, 151, 153, 160, 160])
+Okulary = np.array(["NIE", "TAK", "NIE", "TAK", "NIE", "TAK", "NIE", "TAK", "NIE", "TAK"])
+
+print(np.sort(Imiona))
+
+okularnicy = Imiona[Okulary=="TAK"]
+
+print(okularnicy)
+
+mask = np.logical_and(Plec == 'K', np.logical_and(Wiek >= 20, Wiek <= 30))
+
+print(Imiona[mask])
+
+mask = np.logical_and(Waga >= 60, np.logical_and(Waga <= 80, np.logical_and(Wzrost >= 160, np.logical_and(Wzrost <= 180, Okulary == 'NIE'))))
+
+print(Imiona[mask])
+
+print(Imiona, Waga/Wzrost**2)
+
+
+Wysokosc = np.array([
+    153, 154, 154, 155, 158, 159, 160, 161, 163, 164,
+    165, 165, 165, 166, 167, 167, 168, 168, 170, 170,
+    170, 171, 173, 174, 174, 174, 175, 175, 176, 177,
+    178, 178, 178, 179, 179, 179, 180, 180, 183, 185])
+But = np.array([5, 6, 6, 6, 5, 7, 6, 5, 6, 7,
+                7, 6, 7, 10, 9.5, 10, 10, 9, 10.5, 9.5,
+                8.5, 9, 10, 8, 10, 9, 12, 11, 9, 10,
+                11, 11, 12, 10.5, 11.5, 11, 13, 12, 12.5, 13])
+
+print("Sredni rozmiar buta: " + str(np.average(But)))
+print("Max rozmiar buta: " + str(np.max(But)))
+print("Srednia wyskosc na max rozmiar buta: " + str(np.average(Wysokosc[But == np.max(But)])))
+print("Najmniejsza wysokosc z max butem: " + str(np.min(Wysokosc[But == np.max(But)])))
+
+unikalnaWysokosc = np.unique(Wysokosc)
+
+for wzrost in unikalnaWysokosc:
+    print("Sredni rozmiar dla", wzrost, "to", np.average(But[wzrost == Wysokosc]))
+
+print("Srednia wysokosc: " + str(np.average(Wysokosc)))
+
+print("Najmiejsza wysokosc z rozmiarem 10", min(Wysokosc[But==10]))
+print("Najmiejsza wysokosc z rozmiarem 10", max(Wysokosc[But==10]))
+
+Slownik = {
+    5: 37.5,
+    5.5: 38,
+    6: 39,
+    6.5: 39.5,
+    7: 40,
+    7.5: 40.5,
+    8: 41,
+    8.5: 42,
+    9: 42.5,
+    9.5: 43,
+    10: 44,
+    10.5: 44.5,
+    11: 45,
+    11.5: 45.5,
+    12: 46,
+    12.5: 47,
+    13: 47.5,
+}
+print(But)
+
+for i in range(len(But)):
+    But[i] = Slownik[But[i]]
+
+print(But)
+======================================
+import numpy as np
+import pandas as pd
+
+
+a = pd.Series([100, 100, 101, 1, 2 , 3, 4])
+
+print(a)
+
+b = pd.Series(["test", "test", "test1"])
+
+print(b)
+
+list = [1, 2, 3, 4]
+
+c = pd.Series([list])
+
+print(c)
+
+d = pd.Series.tolist(a)
+
+print(d)
+
+e = pd.Series.to_numpy(a)
+
+print(e)
+
+f = pd.Series([8, 4, 4, 2])
+g = pd.Series([2, 3, 2, 5])
+
+print(f+g)
+print(f-g)
+print(f*g)
+print(f/g)
+
+data = pd.Series(np.round(np.random.uniform(-10, 10, size=10), 1))
+print(data)
+
+h = data[data<0]
+print(h)
+
+my_list = [1, 32, -37, 91, 12, 11, -5]
+
+my_dict = {
+    'a' : [1, 3, 2],
+    'b' : [2, 5, 7],
+    'c' : [3, 4, 8],
+    'd' : [4, 10, 12]}
+
+my_array = np.array([[1, 2, 5],
+                     [-2, 3, 3],
+                     [5, 2, 6]])
+
+my_series = pd.Series ([1, 32, -37, 91, 12, 11, -5], index = ['a','b','c','d','e','f','g'])
+
+print(my_series)
+
+df_list = pd.DataFrame({"Lista": my_list})
+df_dict = pd.DataFrame({"Slownik": my_dict})
+df_array = pd.DataFrame(my_array)
+df_series = pd.DataFrame({"Seria Danych": my_series})
+
+print(df_list)
+print(df_dict)
+print(df_array)
+print(df_series)
+
+df_list = df_list.values.tolist()
+df_list = sum(df_list, [])
+print(df_list)
+
+df_dict = df_dict.to_dict()
+print(df_dict)
+
+df_array = df_array.to_numpy()
+print(df_array)
+
+df_series = df_series.squeeze(0)
+
+print(df_series)
+
+test_dataFrame = pd.DataFrame({
+  "calories": [420, 380, 390],
+  "duration": [50, 40, 45]
+})
+
+print(test_dataFrame)
+
+print(test_dataFrame.loc[0])
+
+print(test_dataFrame["calories"])
+
+print(test_dataFrame.sort_values("calories"))
+
+df = pd.DataFrame({'A': [1, 2, 3, 4],
+                   'B': [5, 6, 7, 8],
+                   'C': [9, 10, 11, 12]})
+
+df_reshaped = pd.DataFrame(df.values.reshape((2, 6)))
+print(df)
+print(df_reshaped)
+
+df = pd.DataFrame({'A': [1, 2, 3],
+                   'B': [4, 5, 6],
+                   'C': [7, 8, 9]})
+
+# Print the element at the second row and third column
+print(df)
+print("wynik: ", df.iloc[1, 2])
+print(df_reshaped)
+print("wynik: ", df_reshaped.iloc[1, 2])
+
+print("==========================")
+
+df1 = pd.DataFrame([[2942, 9840, 2794, 8891, 8111, 2933, 8301, 9125],
+                    ['Sylwia', 'Katarzyna', 'Teresa', 'Tomasz', 'Cezary', 'Zenon', 'Filip' , 'Adrian'],
+                    [13, 31, 34, 14, 13, 28, 20, 15]]).T
+
+df1.columns = ['ID', 'Name', 'Age']
+
+print(df1)
+
+weight = [65, 80, 64, 69, 74, 61, 66, 61]
+height = [179, 179, 151, 177, 170, 157, 151, 153]
+glasses = [False, True, False, True, False, True, False, True]
+
+df2 = pd.DataFrame([[2312, 2336, 2942, 9840, 2794, 8891, 8111, 2933],
+                    ['Anna', 'Zofia', 'Sylwia', 'Katarzyna', 'Teresa', 'Tomasz', 'Cezary', 'Zenon'],
+                    weight,
+                    height,
+                    glasses],
+                   ).T
+
+df2.columns = ['ID', ' Name', 'W', 'H', 'Gl']
+
+# df2 = df2.set_index("ID")
+
+print(df2)
+
+df0 = pd.merge(df1, df2, on="ID", how="outer")
+
+print(df0)
+
+df0 = pd.merge(df1, df2, on="ID", how="inner")
+
+print(df0)
+
+df0 = df0.sort_values("Name")
+
+print(df0)
+
+okularnicy = df0[df0['Gl'] == True]
+print(okularnicy)
+
+print(df0)
+
+
+malolaci = df0[(df0["Age"] > 20) & (df0["Age"] < 30)]
+
+print(malolaci)
+
+df0 = pd.merge(df1, df2, on="ID", how="inner")
+
+bmi = df0["W"] / df0["H"] ** 2
+
+df0["BMI"] = bmi
+print(df0)
+
+# sredni wiek
+print(df0['Age'].mean())
+
+print("Sredni dla osob w okularach: ", df0[df0['Gl'] == True]['Age'].mean())
+print("Sredni dla osob bez okularow: ", df0[df0['Gl'] == False]['Age'].mean())
+
+print("Sredni BMI w okularach: ", df0[df0['Gl'] == True]['BMI'].mean())
+print("Sredni BMI bez okularow: ", df0[df0['Gl'] == False]['BMI'].mean())
+===============================================
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#file = open('tekst1.txt', encoding='utf-8')
+# = file.read()
+#print(s)
+#print(type(s))
+#file.close()
+
+data = np.genfromtxt('jajka2023.csv', delimiter=";", dtype=('|U16'), encoding="latin-1")
+print(data)
+prices = data[1:, 1:]
+prices = np.array([[float(cell.replace(',', '.')) if cell != '' else np.nan for cell in row] for row in prices])
+print(prices)
+average_price = round(np.nanmean(prices),2)
+min_index = np.unravel_index(np.nanargmin(prices), prices.shape)
+max_index = np.unravel_index(np.nanargmax(prices), prices.shape)
+print(f"Średnia cena jaj: {average_price}")
+max_wynik = np.array([[data[0][max_index[1]+1]], [data[max_index[0]+1][0]]])
+min_wynik = np.array([[data[0][min_index[1]+1]], [data[min_index[0]+1][0]]])
+print(max_wynik)
+print(min_wynik)
+
+# zadanie 2, nie dziala chuj wie czemu
+
+
+data = pd.read_csv('jajka2023.csv', delimiter=';', index_col=0, encoding='latin-1', na_values='')
+
+print(data)
+
+data = data.replace(',', '.', regex=True).astype(float)
+
+srednia = data.mean()
+minCena = data.min()
+maxCena = data.max()
+
+print(data[data == minCena])
+print(data[data == maxCena])
+
+# zadanie 3
+columns =['Gorny Slask', 'Bydgoszcz', 'Lublin', 'Warszawa', 'Trojmiasto', 'Krakow']
+data_subset = data[columns].dropna()
+plt.boxplot(data_subset.values, labels=columns)
+plt.xlabel('City')
+plt.ylabel('Price')
+plt.title('Supermarket Prices Box Plot')
+#plt.show()
+
+# zadanie 4
+
+piojas = pd.read_csv("kurs4.csv", delimiter=";", decimal=",", encoding="utf-8")
+
+print(piojas)
+=====================================
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 1 zadanie
+data = pd.read_csv("penguins.csv")
+
+# a
+male_data = data[data["sex"] == "MALE"]
+female_data = data[data["sex"] == "FEMALE"]
+
+print(round(male_data["body_mass_g"].mean(), 2))
+print(round(female_data["body_mass_g"].mean(), 2))
+
+# b
+max_waga = data["body_mass_g"].max()
+min_waga = data["body_mass_g"].min()
+
+print(data[data["body_mass_g"] == max_waga])
+
+print(data[data["body_mass_g"] == min_waga])
+
+# c
+
+count = data.groupby(['island', 'species']).size()
+
+print(count)
+
+# d
+
+dataAdelie = data[data['species'] == "Adelie"]
+countAdelie = dataAdelie.groupby(['island']).size()
+
+print(countAdelie)
+
+# e
+
+#counte = data.groupby(['island']).size()
+#counte.plot(kind='bar')
+#plt.xlabel('Species and Island')
+#plt.ylabel('Count')
+#plt.show()
+
+# f
+
+#plt.scatter(data["bill_length_mm"], data["bill_depth_mm"])
+
+#plt.show()
+
+# g
+
+colors = np.where(data["sex"] == "MALE", "blue", "pink")
+
+size = (data["body_mass_g"]/2000)**5
+
+#plt.scatter(data["bill_length_mm"], data["bill_depth_mm"], c=colors, s=size)
+
+#plt.show()
+
+# 2
+
+# a
+
+df = pd.read_csv('tips.csv')
+
+print(df.head())
+
+sns.set_theme()
+#sns.scatterplot(data=df, x='total_bill', y='tip')
+
+#plt.show()
+
+# b
+
+penguins = sns.load_dataset("penguins")
+
+sizes = (penguins['body_mass_g']/2000)**5
+markerDict = {'Adelie': 's', 'Chinstrap': 'o', 'Gentoo': '^'}
+#sns.scatterplot(penguins, x='bill_length_mm', y='bill_depth_mm', hue='sex', size=sizes, style="species", markers=markerDict)
+
+#plt.show()
+
+# 3
+
+# a
+iris = sns.load_dataset("iris")
+
+sns.scatterplot(iris, x='sepal_length', y='sepal_width', hue="species")
+plt.show()
+
+#sns.scatterplot(iris, x='petal_length', y='petal_width', hue="species")
+#plt.show()
+
+setosa = iris.loc[iris["species"] == "setosa"]
+#sns.catplot(setosa)
+#plt.show()
+
+versicolor = iris.loc[iris["species"] == "versicolor"]
+#sns.catplot(versicolor)
+#plt.show()
+
+virginica = iris.loc[iris["species"] == "virginica"]
+#sns.catplot(virginica)
+#plt.show()
+
+# b
+
+#sns.pairplot(iris, hue="species")
+#.show()
+========================================
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+heights = np.array([
+    153, 154, 154, 155, 158, 159, 160, 161, 163, 164,
+    165, 165, 165, 166, 167, 167, 168, 168, 170, 170,
+    170, 171, 173, 174, 174, 174, 175, 175, 176, 177,
+    178, 178, 178, 179, 179, 179, 180, 180, 183, 185])
+shoe_sizes = np.array([5, 6, 6, 6, 5, 7, 6, 5, 6, 7,
+                7, 6, 7, 10, 9.5, 10, 10, 9, 10.5, 9.5,
+                8.5, 9, 10, 8, 10, 9, 12, 11, 9, 10,
+                11, 11, 12, 10.5, 11.5, 11, 13, 12, 12.5, 13])
+
+shoe_size_mean = shoe_sizes.mean()
+shoe_size_max = shoe_sizes.max()
+
+print(shoe_size_mean)
+print(shoe_size_max)
+
+print("Srednia wyskosc na max rozmiar buta: " + str(np.average(heights[shoe_sizes == np.max(shoe_sizes)])))
+
+print("Minimalna wysokosc na max rozmiar buta: " + str(np.min(heights[shoe_sizes == np.max(shoe_sizes)])))
+
+unikalnaWysokosc = np.unique(heights)
+
+for wzrost in unikalnaWysokosc:
+    print("Sredni rozmiar dla", wzrost, "to", np.average(shoe_sizes[wzrost == heights]))
+
+print("Srednia wysokosc: " + str(np.average(heights)))
+
+print(np.min(heights[shoe_sizes == 10]))
+
+print(np.max(heights[shoe_sizes == 10]))
+
+Slownik = {
+    5: 37.5,
+    5.5: 38,
+    6: 39,
+    6.5: 39.5,
+    7: 40,
+    7.5: 40.5,
+    8: 41,
+    8.5: 42,
+    9: 42.5,
+    9.5: 43,
+    10: 44,
+    10.5: 44.5,
+    11: 45,
+    11.5: 45.5,
+    12: 46,
+    12.5: 47,
+    13: 47.5,
+}
+american_shoe_sizes = shoe_sizes.copy()
+
+for i in range(len(shoe_sizes)):
+    american_shoe_sizes[i] = Slownik[shoe_sizes[i]]
+
+print(american_shoe_sizes)
+
+# Zadanie 2
+
+#plt.style.use("dark_background")
+
+x = np.linspace(-2, 2, 30)
+y = x
+#sns.scatterplot(x=x, y=y, edgecolor="none", c="#ADD8E6")
+
+x = np.linspace(-2, 2, 30)
+y = x**2
+#sns.scatterplot(x=x, y=y, edgecolor="none", c="#f5a142")
+
+#plt.show()
+
+# Zadanie 3
+
+wyniki = pd.read_csv("wyniki.csv", delimiter=';', encoding="utf-8")
+wyniki["Kod TERYT"] = wyniki["Kod TERYT"].astype("string")
+
+ilosc_kart = wyniki['Komisje obwodowe otrzymały kart do głosowania'].sum()
+
+print(ilosc_kart)
+
+
+procenty = (wyniki["Liczba kopert zwrotnych, w których nie było oświadczenia o osobistym i tajnym oddaniu głosu"]/wyniki["Liczba otrzymanych kopert zwrotnych"])*100
+
+#plt.bar(wyniki["Województwo"], procenty)
+#plt.xticks(rotation='vertical')
+#plt.show()
+
+kandydaci = np.array(["Robert BIEDROŃ", "Krzysztof BOSAK", "Andrzej Sebastian DUDA", "Szymon Franciszek HOŁOWNIA", "Marek JAKUBIAK", "Władysław Marcin KOSINIAK-KAMYSZ", "Mirosław Mariusz PIOTROWSKI", "Paweł Jan TANAJNO", "Rafał Kazimierz TRZASKOWSKI", "Waldemar Włodzimierz WITKOWSKI", "Stanisław Józef ŻÓŁTEK"])
+
+lista_wynikow = np.array([])
+for i in range(len(kandydaci)):
+    lista_wynikow = np.append(lista_wynikow, wyniki[kandydaci[i]].sum())
+
+print(lista_wynikow)
+
+glosy = wyniki.groupby("Kod TERYT")[kandydaci].sum()
+sorted_glosy = glosy.iloc[glosy.sum(axis=1).argsort()[::-1]]
+
+sorted_glosy.plot(kind="bar", stacked=True)
+
+plt.legend(kandydaci)
+plt.xticks(rotation='vertical')
+
+plt.show()
